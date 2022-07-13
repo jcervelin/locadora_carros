@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Aplicacao {
@@ -17,13 +18,15 @@ public class Aplicacao {
         Locacao locacao = new Locacao(fuscao,
                 lamborghini,onibus,tesla);
 
-        final List disponiveis = locacao.disponiveis();
+        final List<Veiculo> disponiveis = locacao.disponiveis();
 
         System.out.println(disponiveis);
         System.out.println(disponiveis.size());
 
         locacao.incluirVeiculo(new Bicicleta("Caloi", "Ceci"));
         locacao.incluirVeiculo(new Bicicleta("Caloi", "Ceci"));
+        locacao.incluirVeiculo(new Onibus("Mercedes", "Véio", BigDecimal.valueOf(20_000),1945));
+        locacao.incluirVeiculo(new Carro("Fiat", "147", BigDecimal.valueOf(10_000),1960));
 
         System.out.println(disponiveis);
         System.out.println(disponiveis.size());
