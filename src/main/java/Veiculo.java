@@ -1,4 +1,4 @@
-import java.util.List;
+import java.math.BigDecimal;
 
 public class Veiculo implements Cloneable {
     public Veiculo(String marca, String modelo) {
@@ -6,8 +6,35 @@ public class Veiculo implements Cloneable {
         this.modelo = modelo;
     }
 
+    public Veiculo(String marca, String modelo, BigDecimal preco, int ano) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.preco = preco;
+        this.ano = ano;
+    }
+
     private String marca;
     private String modelo;
+
+    private BigDecimal preco;
+
+    private int ano;
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
 
     public String getMarca() {
         return marca;
@@ -30,6 +57,8 @@ public class Veiculo implements Cloneable {
         return "Veiculo{" +
                 "marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
+                ", preco=" + preco +
+                ", ano=" + ano +
                 '}';
     }
 
