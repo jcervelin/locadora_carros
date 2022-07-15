@@ -74,8 +74,7 @@ public class Veiculo implements Cloneable {
     }
 
 //    @Override
-//    public int compareTo(Object o) {
-//        domains.Veiculo outro = (domains.Veiculo) o;
+//    public int compareTo(Veiculo outro) {
 //        return this.getMarca().compareTo(outro.getMarca());
 //    }
 
