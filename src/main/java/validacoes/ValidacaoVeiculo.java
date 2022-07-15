@@ -9,7 +9,7 @@ import static java.lang.String.format;
 
 public class ValidacaoVeiculo {
 
-    public static final String MARCA_NAO_ENCONTRADA_MSG = "O Veiculo da marca %s nao foi encontrado";
+    public static final String MARCA_NAO_ENCONTRADA_MSG = "O domains.Veiculo da marca %s nao foi encontrado";
     private static final String MARCA_NAO_INFORMADA_MSG = "Marca nao informada";
 
 

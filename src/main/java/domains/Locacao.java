@@ -1,3 +1,7 @@
+package domains;
+
+import comparators.MarcaComparator;
+import comparators.PrecoComparator;
 import exceptions.ParametroNaoInformadoException;
 
 import java.util.ArrayList;
@@ -51,7 +55,20 @@ public class Locacao {
         return veiculos;
     }
 
+    public List<Veiculo> retornaOrdenadoAno() {
+        Collections.sort(veiculos, new Comparator<Veiculo>() {
+            @Override
+            public int compare(Veiculo o1, Veiculo o2) {
+                return Integer.compare(o2.getAno(), o1.getAno()) ;
+            }
+        });
+        return veiculos;
+    }
 
+    public List<Veiculo> retornaOrdenadoPreco() {
+        Collections.sort(veiculos, new PrecoComparator());
+        return veiculos;
+    }
 
     public void incluirVeiculo(Veiculo veiculo) {
         veiculos.add(veiculo);

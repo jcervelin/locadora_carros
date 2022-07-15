@@ -1,3 +1,9 @@
+import domains.Bicicleta;
+import domains.Carro;
+import domains.Locacao;
+import domains.Onibus;
+import domains.Veiculo;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -41,22 +47,35 @@ public class Aplicacao {
         final List<Veiculo> ordenadoPorModelo = locacao.retornaOrdenadoModelo();
         System.out.println("Ordenado por Modelo" + ordenadoPorModelo);
 
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Digite a marca");
-//        final String marca = scanner.nextLine();
-//        List buscaPorMarca = null;
-//        try {
-//            buscaPorMarca = locacao.buscaPorMarca(marca);
-//        } catch (ParametroNaoInformadoException ex) {
-//            System.out.println("Parametro nao encontrado");
-//        } finally {
-//            scanner.close();
-//        }
+        final List<Veiculo> ordenadoPorPreco = locacao.retornaOrdenadoPreco();
+        System.out.println("Ordenado por Preco" + ordenadoPorPreco);
 
-//        System.out.println(buscaPorMarca);
-//
+        final List<Veiculo> ordenadoPorAno = locacao.retornaOrdenadoAno();
+        System.out.println("Ordenado por Ano" + ordenadoPorAno);
+
     }
 
 
 }
+
+// quando se vai salvar um valor na tabela hash,
+// o HashSet e o HashMap Java usam a seguinte formula
+
+// (Capacidade do array interno - 1) & hascode
+
+//15
+//1111
+
+
+// 0000
+// 0001
+// 0010
+// 0011
+// 0100
+// 0101
+
+//5
+
+//1111
+//0101
+//0101

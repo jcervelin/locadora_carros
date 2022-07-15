@@ -1,3 +1,5 @@
+package domains;
+
 import java.math.BigDecimal;
 
 public class Veiculo implements Cloneable {
@@ -54,7 +56,7 @@ public class Veiculo implements Cloneable {
 
     @Override
     public String toString() {
-        return "Veiculo{" +
+        return "domains.Veiculo{" +
                 "marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", preco=" + preco +
@@ -73,7 +75,29 @@ public class Veiculo implements Cloneable {
 
 //    @Override
 //    public int compareTo(Object o) {
-//        Veiculo outro = (Veiculo) o;
+//        domains.Veiculo outro = (domains.Veiculo) o;
 //        return this.getMarca().compareTo(outro.getMarca());
 //    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Veiculo)) return false;
+
+        Veiculo veiculo = (Veiculo) o;
+
+        if (ano != veiculo.ano) return false;
+        if (marca != null ? !marca.equals(veiculo.marca) : veiculo.marca != null) return false;
+        if (modelo != null ? !modelo.equals(veiculo.modelo) : veiculo.modelo != null) return false;
+        return preco != null ? preco.equals(veiculo.preco) : veiculo.preco == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = marca != null ? marca.hashCode() : 0;
+        result = 31 * result + (modelo != null ? modelo.hashCode() : 0);
+        result = 31 * result + (preco != null ? preco.hashCode() : 0);
+        result = 31 * result + ano;
+        return result;
+    }
 }
