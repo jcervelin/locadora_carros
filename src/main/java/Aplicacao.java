@@ -1,5 +1,7 @@
+import dao.ClienteDao;
 import domains.Bicicleta;
 import domains.Carro;
+import domains.Cliente;
 import domains.Locacao;
 import domains.Onibus;
 import domains.Veiculo;
@@ -10,6 +12,7 @@ import validacoes.ValidacaoVeiculo;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 
@@ -17,16 +20,13 @@ public class Aplicacao {
 
     public static void main(String[] args) {
 
-        Veiculo fuscao = new Carro("Volks", "Fuscao");
-        Veiculo lamborghini = new Carro("Lamborghini", "Aventator");
-        Veiculo onibus = new Onibus("Mercedes", "Busao");
-        Veiculo tesla = new Carro("Tesla", "XYZ");
-        Veiculo onibusVeio = new Onibus("Mercedes", "Véio", BigDecimal.valueOf(20_000), 1945);
-
-        // Uso do clone
-        final Object novoFusca = fuscao.clone();
-        System.out.println("Novo fusca: " + novoFusca);
-        System.out.println(" fusca normal: " + fuscao);
+        Veiculo fuscao = new Carro("Volks", "Fuscao", BigDecimal.valueOf(50), 1980);
+        Veiculo lamborghini = new Carro("Lamborghini", "Aventator",  BigDecimal.valueOf(300), 2022);
+        Veiculo onibus = new Onibus("Mercedes", "Busao", BigDecimal.valueOf(200), 2015);
+        Veiculo tesla = new Carro("Tesla", "XYZ", BigDecimal.valueOf(200), 2022);
+        Veiculo outroTesla = new Carro("Tesla", "ABC", BigDecimal.valueOf(200), 2022);
+        Veiculo onibusVeio = new Onibus("Mercedes", "Véio", BigDecimal.valueOf(100), 1945);
+        Veiculo bike = new Bicicleta("Caloi", "Ceci",BigDecimal.valueOf(15), 2022);
 
         final Comparator<Veiculo> veiculoComparator =
                 Comparator.comparing(Veiculo::getMarca)
@@ -39,10 +39,8 @@ public class Aplicacao {
                 )
         );
 
-        locacao.incluirVeiculo(new Bicicleta("", "Ceci"));
-        locacao.incluirVeiculo(new Bicicleta("Caloi", "Ceci"));
-        locacao.incluirVeiculo(onibusVeio);
-        locacao.incluirVeiculo(new Carro("Fiat", "147", BigDecimal.valueOf(10_000), 1960));
+        locacao.incluirVeiculo(bike);
+        //locacao.incluirVeiculo(onibusVeio);
         locacao.incluirVeiculo(fuscao);
         locacao.incluirVeiculo(fuscao);
         locacao.incluirVeiculo(lamborghini);
@@ -50,10 +48,23 @@ public class Aplicacao {
         locacao.incluirVeiculo(onibus);
         locacao.incluirVeiculo(tesla);
 
+        lamborghini.adicionaSimilares(List.of(outroTesla, lamborghini, bike));
+
         final Collection<Veiculo> disponiveis = locacao.disponiveis();
 
         System.out.println("Veiculos ordenados pelo comparator" + disponiveis);
 
+        System.out.println(lamborghini.getSimilares());
+
+        final ClienteDao clienteDao = new ClienteDao();
+        final Cliente joao = new Cliente("Joao", "joao@gmail.com");
+        clienteDao.salvar(joao);
+
+        clienteDao.print(List.of(joao));
+
+        System.out.println("printer:");
+        Printer.printLists(List.of(lamborghini));
+        Printer.printLists(List.of(joao));
     }
 }
 

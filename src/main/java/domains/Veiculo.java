@@ -1,8 +1,11 @@
 package domains;
 
-import java.math.BigDecimal;
+import dao.Salvavel;
 
-public class Veiculo implements Cloneable {
+import java.math.BigDecimal;
+import java.util.List;
+
+public abstract class Veiculo implements Salvavel {
     public Veiculo(String marca, String modelo) {
         this.marca = marca;
         this.modelo = modelo;
@@ -15,12 +18,22 @@ public class Veiculo implements Cloneable {
         this.ano = ano;
     }
 
+    public void adicionaSimilares(List<? extends Veiculo> similares) {
+        this.similares = similares;
+    }
+
     private String marca;
     private String modelo;
 
     private BigDecimal preco;
 
     private int ano;
+
+    private List<? extends Veiculo> similares;
+
+    public List<? extends Veiculo> getSimilares() {
+        return similares;
+    }
 
     public BigDecimal getPreco() {
         return preco;
@@ -63,20 +76,6 @@ public class Veiculo implements Cloneable {
                 ", ano=" + ano +
                 '}';
     }
-
-    public Veiculo clone() {
-        try {
-            Veiculo clone = (Veiculo) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError(e);
-        }
-    }
-
-//    @Override
-//    public int compareTo(Veiculo outro) {
-//        return this.getMarca().compareTo(outro.getMarca());
-//    }
 
     @Override
     public boolean equals(Object o) {
