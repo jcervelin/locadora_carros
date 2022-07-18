@@ -18,7 +18,7 @@ public abstract class Veiculo implements Salvavel {
         this.ano = ano;
     }
 
-    public void adicionaSimilares(List<? extends Veiculo> similares) {
+    public void adicionaSimilares(List<Veiculo> similares) {
         this.similares = similares;
     }
 
@@ -29,9 +29,9 @@ public abstract class Veiculo implements Salvavel {
 
     private int ano;
 
-    private List<? extends Veiculo> similares;
+    private List<Veiculo> similares;
 
-    public List<? extends Veiculo> getSimilares() {
+    public List<Veiculo> getSimilares() {
         return similares;
     }
 

@@ -13,9 +13,5 @@ public class Carro extends Veiculo {
         super(marca, modelo, preco, ano);
     }
 
-    public void adicionaSimilaresCarro(List<Carro> similares) {
-        super.adicionaSimilares(similares);
-    }
-
 
 }
