@@ -1,4 +1,5 @@
 import dao.ClienteDao;
+import dao.Salvavel;
 import domains.Bicicleta;
 import domains.Carro;
 import domains.Cliente;
@@ -10,10 +11,15 @@ import validacoes.ValidaMarca;
 import validacoes.ValidacaoVeiculo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Aplicacao {
@@ -59,14 +65,61 @@ public class Aplicacao {
         final ClienteDao clienteDao = new ClienteDao();
         final Cliente joao = new Cliente("Joao", "joao@gmail.com");
         clienteDao.salvar(joao);
-
         clienteDao.print(List.of(joao));
 
         System.out.println("printer:");
-        Printer.printLists(List.of(lamborghini));
+        Printer.printLists(lamborghini.getSimilares());
         Printer.printLists(List.of(joao));
+
+        List<Cliente> clientes = List.of(joao);
+
+        Carro carroLamb = (Carro)lamborghini;
+        Carro carroTes = (Carro)outroTesla;
+
+        List<Carro> carros = List.of(carroLamb, carroTes);
+        List<Veiculo> veiculos = new ArrayList<>();
+
+        copiaLista(carros, veiculos);
+
     }
+
+    // Carro extende Veiculo
+    // Veiculo é super de carro
+    private static <T> void copiaLista(List<? extends T> origem, List<? super T> destino) {
+        for (T o : origem) {
+            destino.add(o);
+        }
+    }
+
+
+    // List -> RAW
+    // List<Object> -> Generics
+
+    public static void passaTudo(List<? super Veiculo> ojb) {
+        Veiculo fuscao = new Carro("Volks", "Fuscao", BigDecimal.valueOf(50), 1980);
+        ojb.add(fuscao);
+        Veiculo object = (Veiculo)ojb.get(0);
+
+        System.out.println(ojb);
+    }
+
+
 }
+
+// PRINCIPIO get/PUT
+
+
+// Covariancia
+// voce consegue LER, MAS NAO PODE ADICIONAR
+// List<? extends T> origem
+
+// Contravariancia
+// voce consegue ADICIONAR coisas numa estrutura generica, MAS NAO LER
+// List<? super T> destino
+// voce consegue contornar com Cast
+// Veiculo object = (Veiculo)ojb.get(0);
+
+
 
 // quando se vai salvar um valor na tabela hash,
 // o HashSet e o HashMap Java usam a seguinte formula

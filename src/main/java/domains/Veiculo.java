@@ -1,11 +1,14 @@
 package domains;
 
 import dao.Salvavel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public abstract class Veiculo implements Salvavel {
+public abstract class Veiculo implements Salvavel, Comparable<Veiculo> {
     public Veiculo(String marca, String modelo) {
         this.marca = marca;
         this.modelo = modelo;
@@ -97,5 +100,10 @@ public abstract class Veiculo implements Salvavel {
         result = 31 * result + (preco != null ? preco.hashCode() : 0);
         result = 31 * result + ano;
         return result;
+    }
+
+    @Override
+    public int compareTo(Veiculo outro) {
+        return this.preco.compareTo(outro.getPreco());
     }
 }
